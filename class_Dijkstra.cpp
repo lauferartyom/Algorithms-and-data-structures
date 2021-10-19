@@ -73,11 +73,6 @@ bool Route::next_Route()
 {
     int i = n - 1, j = n, temp = 0, weight = 0, min_weight = 0xFFFFFFF;
 
-    for(int i = 0; i < n + 1; i++)
-    {
-        cout << r[i] << " ";
-    }
-
     //cout << "\n";
 
     
@@ -176,21 +171,24 @@ int main(int argc, char const *argv[])
 
     cout << "\n";
 
-    Route A(n);
+    Route A(n), B(n);
 
     while(_bool == true)
     {
         weight = A.Route_price(matrix);
-        _bool = A.next_Route();
-        cout << "route cost:  " << weight << "\n";
 
+        cout << A << " " << "route cost:  " << weight << "\n";
         if(weight < MIN_WEIGHT)
         {
             MIN_WEIGHT = weight;
+            B = A;
         }
+
+        _bool = A.next_Route();
+
     }
 
-    cout << "minimum cost: " << MIN_WEIGHT << "\n";
+    cout << B << "minimum cost: " << MIN_WEIGHT << "\n";
 
     return 0;
 }
