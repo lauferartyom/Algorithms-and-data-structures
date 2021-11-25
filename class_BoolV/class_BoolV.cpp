@@ -119,14 +119,21 @@ void BoolV::Set0(int k)
 
 int BoolV::operator[](int k)
 {
-    if(k >= m && k < 0)
+    if(k >= nbit && k < 0)
     {
         cout << "Index fail" << "\n";
-
+        
         return -1;
     }else
     {
-        return v[k];
+        unsigned int mask = (1 << k);
+        if((v[k / 32] & mask) == 0)
+        {
+            return 0;
+        }else
+        {
+            return 1;
+        }
     }
 } 
 
@@ -191,7 +198,7 @@ ostream& operator<<(ostream& out, const BoolV& _b)
 
 int main()
 {
-    BoolV a("1010101"), b("1010101"), c("10101");
+    BoolV a("1010101"), b("1010101"), c("10101011010101101010110101011010101");
 
     /* cout << a << "\n";
     a.Set1(1);
@@ -201,18 +208,18 @@ int main()
     b.Set0(0);
     cout << b << "\n"; */
 
-    /* cout << c[0] << "\n"; */
+    /* cout << c[33] << "\n"; */
 
     /* a = b;
     cout << a << "\n"; */
 
-    if(a == b)
+    /* if(a == b)
     {
         cout << 1;
     }else
     {
         cout << 0;
-    }
+    } */
 
     return 0;
 }
