@@ -110,6 +110,8 @@ Array& Array::operator=(Array& A)
 {
     if(this != &A)
     {
+        n = A.n;
+        a = new int[n];
         for(int i = 0; i < A.n; i++)
         {
             a[i] = A.a[i];
